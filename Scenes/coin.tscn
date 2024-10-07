@@ -1,0 +1,71 @@
+[gd_scene load_steps=11 format=3 uid="uid://cg1q2e5nmo1xn"]
+
+[ext_resource type="Texture2D" uid="uid://danl8hl67k6fk" path="res://Assets/2D Platformer Starter Assets/Objects/Coin_1.png" id="1_rw1sd"]
+[ext_resource type="Script" path="res://Assets/Scripts/coin.gd" id="1_s8qfo"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tunxa"]
+atlas = ExtResource("1_rw1sd")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yi7fg"]
+atlas = ExtResource("1_rw1sd")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cmqpg"]
+atlas = ExtResource("1_rw1sd")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yi0kn"]
+atlas = ExtResource("1_rw1sd")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3v6hr"]
+atlas = ExtResource("1_rw1sd")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5k75l"]
+atlas = ExtResource("1_rw1sd")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_acxio"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tunxa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yi7fg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cmqpg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yi0kn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3v6hr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5k75l")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rr1h8"]
+radius = 13.0
+
+[node name="Area2D" type="Area2D"]
+collision_mask = 2
+script = ExtResource("1_s8qfo")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_acxio")
+autoplay = "default"
+frame_progress = 0.372104
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_rr1h8")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

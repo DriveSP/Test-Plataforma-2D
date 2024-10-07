@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://b1tqfx20d3hd6"]
+
+[ext_resource type="Texture2D" uid="uid://cg0dmhfsvkctr" path="res://Assets/2D Platformer Starter Assets/Tile_set/green_1.png" id="1_vb3qw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dgw5x"]
+size = Vector2(64, 32)
+
+[node name="AnimatableBody2D" type="AnimatableBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_vb3qw")
+region_enabled = true
+region_rect = Rect2(64.0504, -0.0206995, 63.8974, 32.1076)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_dgw5x")
+one_way_collision = true
