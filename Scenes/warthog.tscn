@@ -1,0 +1,110 @@
+[gd_scene load_steps=15 format=3 uid="uid://dseldrnp0vuvn"]
+
+[ext_resource type="Texture2D" uid="uid://bkcg78tysuphf" path="res://Assets/2D Platformer Starter Assets/Enemy/Hog_idle.png" id="1_ew54g"]
+[ext_resource type="Script" path="res://Assets/Scripts/warthog.gd" id="2_3k2i2"]
+[ext_resource type="PackedScene" uid="uid://xwma58d4ojxq" path="res://Scenes/killzone.tscn" id="2_4mwxm"]
+[ext_resource type="Texture2D" uid="uid://cueo2o277y7pq" path="res://Assets/2D Platformer Starter Assets/Enemy/Hog_walking.png" id="2_lqgii"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4r6hv"]
+atlas = ExtResource("1_ew54g")
+region = Rect2(0, 0, 96, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g13gi"]
+atlas = ExtResource("1_ew54g")
+region = Rect2(96, 0, 96, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4kefl"]
+atlas = ExtResource("1_ew54g")
+region = Rect2(192, 0, 96, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s6wqg"]
+atlas = ExtResource("1_ew54g")
+region = Rect2(288, 0, 96, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_crfle"]
+atlas = ExtResource("2_lqgii")
+region = Rect2(0, 0, 96, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yon3u"]
+atlas = ExtResource("2_lqgii")
+region = Rect2(96, 0, 96, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kiyrg"]
+atlas = ExtResource("2_lqgii")
+region = Rect2(192, 0, 96, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_356kt"]
+atlas = ExtResource("2_lqgii")
+region = Rect2(288, 0, 96, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_46hbs"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4r6hv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g13gi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4kefl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s6wqg")
+}],
+"loop": true,
+"name": &"default",
+"speed": 7.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_crfle")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yon3u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kiyrg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_356kt")
+}],
+"loop": true,
+"name": &"move",
+"speed": 9.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wlwvv"]
+radius = 28.0713
+
+[node name="Warthog" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_46hbs")
+animation = &"move"
+autoplay = "default"
+frame_progress = 0.015652
+flip_h = true
+script = ExtResource("2_3k2i2")
+
+[node name="Killzone" parent="." instance=ExtResource("2_4mwxm")]
+position = Vector2(-1, 9)
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Killzone"]
+position = Vector2(1, 6)
+shape = SubResource("CircleShape2D_wlwvv")
+
+[node name="RayCastRight" type="RayCast2D" parent="."]
+position = Vector2(-1, 22)
+target_position = Vector2(39, 0)
+
+[node name="RayCastLeft" type="RayCast2D" parent="."]
+position = Vector2(0, 22)
+target_position = Vector2(-37, 0)
+
+[node name="RayCastDown" type="RayCast2D" parent="."]
+position = Vector2(38, 22)
+target_position = Vector2(0, 17)
+
+[node name="RayCastDown2" type="RayCast2D" parent="."]
+position = Vector2(-36, 22)
+target_position = Vector2(0, 18)

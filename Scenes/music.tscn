@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://c5gmq0qlbm6r1"]
+
+[ext_resource type="AudioStream" uid="uid://dyfdjcsbmhofn" path="res://Assets/Music/Heart of Stone (Titan Theme) FF16 [MIDI Mix v2]_DqqlKKKfJ3U.mp3" id="1_j13h8"]
+
+[node name="Music" type="AudioStreamPlayer2D"]
+stream = ExtResource("1_j13h8")
+autoplay = true
+max_distance = 10000.0
+bus = &"Music"
