@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://cb7c4v53daam0"]
+[gd_scene load_steps=48 format=3 uid="uid://cb7c4v53daam0"]
 
 [ext_resource type="Texture2D" uid="uid://cg0dmhfsvkctr" path="res://Assets/2D Platformer Starter Assets/Tile_set/green_1.png" id="1_dpyte"]
 [ext_resource type="PackedScene" uid="uid://cc87cfxf3rpby" path="res://Scenes/player.tscn" id="1_eyvq2"]
@@ -15662,6 +15662,46 @@ sources/7 = SubResource("TileSetAtlasSource_kio7d")
 sources/8 = SubResource("TileSetAtlasSource_h6nts")
 sources/9 = SubResource("TileSetAtlasSource_sxvax")
 
+[sub_resource type="Animation" id="Animation_inhob"]
+resource_name = "move"
+length = 45.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 44.8333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(205, 44), Vector2(4596, 131)]
+}
+
+[sub_resource type="Animation" id="Animation_elv8d"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(205, 44)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_elwjl"]
+_data = {
+"RESET": SubResource("Animation_elv8d"),
+"move": SubResource("Animation_inhob")
+}
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_8jevw"]
+normal = Vector2(0.999665, -0.0258699)
+
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_cbxy8"]
 
 [sub_resource type="Animation" id="Animation_yiqdh"]
@@ -15891,12 +15931,27 @@ layer_6/tile_data = PackedInt32Array(65521, 262144, 0, 131057, 262144, 1, 65522,
 [node name="Player" parent="." instance=ExtResource("1_eyvq2")]
 position = Vector2(-205, -44)
 
-[node name="Camera2D" type="Camera2D" parent="Player"]
+[node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(205, 44)
 process_callback = 0
 limit_bottom = 240
 limit_smoothed = true
 position_smoothing_enabled = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Camera2D"]
+libraries = {
+"": SubResource("AnimationLibrary_elwjl")
+}
+autoplay = "move"
+
+[node name="Killzone" parent="Camera2D" instance=ExtResource("8_4kd56")]
+position = Vector2(-2, 4)
+rotation = 0.00833081
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Camera2D/Killzone"]
+position = Vector2(-581.03, -1.15964)
+shape = SubResource("WorldBoundaryShape2D_8jevw")
 
 [node name="Killzone" parent="." instance=ExtResource("8_4kd56")]
 position = Vector2(-332, 225)
