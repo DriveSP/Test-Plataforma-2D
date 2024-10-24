@@ -4,8 +4,16 @@ extends CharacterBody2D
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
 
+@onready var anim_tree: AnimationTree = %AnimationTreePlayer
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
+
+enum {IDLE, RUN}
+var currentAnim;
 
 func _physics_process(delta: float) -> void:
+	
+	animations_manager()
+	
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
@@ -28,10 +36,22 @@ func _physics_process(delta: float) -> void:
 		
 	if is_on_floor():
 		if direction == 0:
-			$PlayerSprite.play("default")
+			currentAnim = IDLE
 		else:
-			$PlayerSprite.play("move")
+			currentAnim = RUN
 	else:
-		$PlayerSprite.play("jump")	
-
+		jump()
 	move_and_slide()
+
+func animations_manager():
+	match currentAnim:
+		IDLE:
+			anim_tree.set("parameters/Movement/transition_request", "Idle")
+		RUN:
+			anim_tree.set("parameters/Movement/transition_request", "Running")
+			
+func jump():
+	anim_tree.set("parameters/Jump/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
+	
+func attack():
+	anim_tree.set("parameters/Attack/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)

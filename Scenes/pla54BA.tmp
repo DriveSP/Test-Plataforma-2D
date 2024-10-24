@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://cc87cfxf3rpby"]
+[gd_scene load_steps=48 format=3 uid="uid://cc87cfxf3rpby"]
 
 [ext_resource type="Script" path="res://Assets/Scripts/movementplayer.gd" id="1_5n5ix"]
 [ext_resource type="Texture2D" uid="uid://b0l7ojepx8vef" path="res://Assets/2D Platformer Starter Assets/Player/Idle_Bgirl.png" id="1_grgrx"]
@@ -206,6 +206,8 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wi3i0"]
 size = Vector2(34, 67)
 
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_cwnt1"]
+
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_a1oxp"]
 animation = &"attack"
 
@@ -216,6 +218,8 @@ animation = &"dead"
 animation = &"default"
 
 [sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_cafgd"]
+fadein_time = 0.1
+fadeout_time = 0.1
 break_loop_at_end = true
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_lkrad"]
@@ -236,6 +240,8 @@ animation = &"move"
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_82w4l"]
 graph_offset = Vector2(-699.674, -161.511)
+nodes/Attack/node = SubResource("AnimationNodeOneShot_cwnt1")
+nodes/Attack/position = Vector2(-160, -160)
 nodes/Attacking/node = SubResource("AnimationNodeAnimation_a1oxp")
 nodes/Attacking/position = Vector2(-700, 0)
 nodes/Deading/node = SubResource("AnimationNodeAnimation_tvjga")
@@ -251,7 +257,7 @@ nodes/Movement/position = Vector2(-320, -160)
 nodes/Running/node = SubResource("AnimationNodeAnimation_2qgqv")
 nodes/Running/position = Vector2(-560, 0)
 nodes/output/position = Vector2(380, -120)
-node_connections = [&"Jump", 0, &"Movement", &"Jump", 1, &"Jumping", &"Movement", 0, &"Idle", &"Movement", 1, &"Running", &"output", 0, &"Jump"]
+node_connections = [&"Attack", 0, &"Movement", &"Attack", 1, &"Attacking", &"Jump", 0, &"Attack", &"Jump", 1, &"Jumping", &"Movement", 0, &"Idle", &"Movement", 1, &"Running", &"output", 0, &"Jump"]
 
 [sub_resource type="Animation" id="Animation_6mrla"]
 length = 0.428571
@@ -408,7 +414,7 @@ script = ExtResource("1_5n5ix")
 [node name="PlayerSprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_p7g8m")
 autoplay = "default"
-frame = 1
+frame = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1, 11.5)
@@ -419,6 +425,9 @@ unique_name_in_owner = true
 root_node = NodePath("%AnimationTreePlayer/..")
 tree_root = SubResource("AnimationNodeBlendTree_82w4l")
 anim_player = NodePath("../AnimationPlayer")
+parameters/Attack/active = false
+parameters/Attack/internal_active = false
+parameters/Attack/request = 0
 parameters/Jump/active = false
 parameters/Jump/internal_active = false
 parameters/Jump/request = 0
