@@ -237,7 +237,6 @@ input_1/reset = true
 animation = &"move"
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_82w4l"]
-graph_offset = Vector2(-699.674, -161.511)
 nodes/Attack/node = SubResource("AnimationNodeOneShot_cwnt1")
 nodes/Attack/position = Vector2(-160, -160)
 nodes/Attacking/node = SubResource("AnimationNodeAnimation_a1oxp")
@@ -412,6 +411,7 @@ script = ExtResource("1_5n5ix")
 [node name="PlayerSprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_p7g8m")
 autoplay = "default"
+frame = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1, 11.5)

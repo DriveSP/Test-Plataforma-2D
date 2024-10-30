@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://bkcg78tysuphf" path="res://Assets/2D Platformer Starter Assets/Enemy/Hog_idle.png" id="1_ew54g"]
 [ext_resource type="Script" path="res://Assets/Scripts/warthog.gd" id="2_3k2i2"]
-[ext_resource type="PackedScene" uid="uid://xwma58d4ojxq" path="res://Scenes/killzone.tscn" id="2_4mwxm"]
+[ext_resource type="PackedScene" uid="uid://xwma58d4ojxq" path="res://Scenes/Prefabs/killzone.tscn" id="2_4mwxm"]
 [ext_resource type="Texture2D" uid="uid://cueo2o277y7pq" path="res://Assets/2D Platformer Starter Assets/Enemy/Hog_walking.png" id="2_lqgii"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4r6hv"]

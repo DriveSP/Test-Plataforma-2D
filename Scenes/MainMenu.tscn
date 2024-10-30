@@ -1,0 +1,70 @@
+[gd_scene load_steps=4 format=3 uid="uid://cjwfxco8d6f51"]
+
+[ext_resource type="Script" path="res://Assets/Scripts/Menu/MainMenu.gd" id="1_xftt5"]
+
+[sub_resource type="Gradient" id="Gradient_0dche"]
+offsets = PackedFloat32Array(0, 0.493333, 1)
+colors = PackedColorArray(0.0677921, 0.52051, 0.337538, 1, 0, 0.120783, 0.118505, 1, 0.0999504, 0.398858, 9.62615e-08, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_d2yk8"]
+gradient = SubResource("Gradient_0dche")
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 3.0
+offset_top = 16.0
+offset_right = -12.0
+offset_bottom = -11.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_xftt5")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -3.0
+offset_top = -16.0
+offset_right = 13.0
+offset_bottom = 11.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture1D_d2yk8")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_left = 394.0
+offset_top = 213.0
+offset_right = 732.0
+offset_bottom = 279.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="StartButton" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Start"
+
+[node name="QuitButton" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Quit
+"
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -141.275
+offset_top = 111.0
+offset_right = 130.725
+offset_bottom = 157.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 32
+text = "Super Fighter Girl"
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]

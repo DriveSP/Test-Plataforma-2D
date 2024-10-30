@@ -11,13 +11,13 @@ config_version=5
 [application]
 
 config/name="Plataforma 2D"
-run/main_scene="res://Scenes/nivel_1.tscn"
+run/main_scene="res://Scenes/MainMenu.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
-Music="*res://Scenes/music.tscn"
+Music="*res://Scenes/Prefabs/music.tscn"
 
 [editor_plugins]
 
@@ -51,3 +51,5 @@ attack={
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
