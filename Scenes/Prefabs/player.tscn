@@ -411,8 +411,8 @@ script = ExtResource("1_5n5ix")
 
 [node name="PlayerSprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_p7g8m")
-animation = &"dead"
 autoplay = "default"
+frame = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1, 11.5)
