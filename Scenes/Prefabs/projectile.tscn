@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://hfxygld17ee6"]
+
+[ext_resource type="Script" path="res://projectile.gd" id="1_8m8vx"]
+[ext_resource type="Texture2D" uid="uid://dgirqh3loqf31" path="res://Assets/2D Platformer Starter Assets/Objects/apple3.png" id="2_45wer"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lh2bp"]
+radius = 2.23607
+
+[node name="Projectile" type="Area2D"]
+script = ExtResource("1_8m8vx")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_45wer")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_lh2bp")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

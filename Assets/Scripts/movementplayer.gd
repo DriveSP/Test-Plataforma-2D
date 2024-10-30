@@ -4,16 +4,24 @@ extends CharacterBody2D
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
 
+@export var shootSpeed = 1.0
+const PROJECTILE = preload("res://Scenes/Prefabs/projectile.tscn")
+@onready var marker_player: Marker2D = $MarkerPlayer
+@onready var shoot_speed_timer: Timer = $shootSpeedTimer
+var canShoot = true
+var projectileDirection = Vector2(1,0)
+
 @onready var anim_tree: AnimationTree = %AnimationTreePlayer
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
+
 
 enum {IDLE, RUN}
 var currentAnim;
 
 func _physics_process(delta: float) -> void:
-	
-	animations_manager()
-	
+	if Input.is_action_pressed("attack"):
+		attack()
+		shootProjectile()
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
@@ -41,6 +49,8 @@ func _physics_process(delta: float) -> void:
 			currentAnim = RUN
 	else:
 		jump()
+		
+	animations_manager()	
 	move_and_slide()
 
 func animations_manager():
@@ -55,3 +65,28 @@ func jump():
 	
 func attack():
 	anim_tree.set("parameters/Attack/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
+	
+func shootProjectile():
+	
+	if canShoot:
+		canShoot = false
+		shoot_speed_timer.start()
+		
+		var projectilePrefab = PROJECTILE.instantiate()
+		
+		projectilePrefab.set_direction(projectileDirection)
+		get_tree().root.add_child(projectilePrefab)
+		projectilePrefab.global_position = marker_player.global_position
+		
+func _on_shoot_speed_timer_timeout() -> void:
+	canShoot = true
+
+func setup_direction(direction):
+	projectileDirection = direction
+	
+	if direction.x > 0:
+		scale.x = 1
+		rotation_degrees = 0
+	elif direction.x < 0:
+		scale.x = -1
+		rotation_degrees = 0

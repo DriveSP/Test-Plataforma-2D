@@ -23,6 +23,10 @@ Music="*res://Scenes/Prefabs/music.tscn"
 
 enabled=PackedStringArray("res://addons/AS2P/plugin.cfg")
 
+[global_group]
+
+enemy=""
+
 [input]
 
 jump={
